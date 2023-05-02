@@ -2,11 +2,11 @@
 export class Quiz{
     question : string;
     choices: string[];
-    answerIndex: string;
+    answer: string;
 
-    constructor(question:string, choices: string[], answerIndex: string){
+    constructor(question:string, choices: string[], answer: string){
         this.question = question;
         this.choices = choices;
-        this.answerIndex = answerIndex;
+        this.answer = answer;
     }
 }

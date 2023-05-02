@@ -14,10 +14,11 @@ export class DataserviceService {
   }
 
   getQuiz(): Observable<any>{
+    console.log("flow 1 - from getQuiz() method in service");
     return this.http.get<any[]>('api/quiz');
   }
 
-  checkLogin(user: any): Observable<boolean>{
+  checkLogin(user: User): Observable<boolean>{
     console.log('flow 5 - inside checkLogin() function in dataservice ' + " " + user);
     return this.http.post<boolean>('api/check-login', user);
   }
