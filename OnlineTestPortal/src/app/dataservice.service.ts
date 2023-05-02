@@ -1,6 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { User } from 'user';
 
 @Injectable({
   providedIn: 'root'
@@ -17,7 +18,7 @@ export class DataserviceService {
   }
 
   checkLogin(user: any): Observable<boolean>{
-    console.log(user + 'inside checkLogin function in dataservice');
+    console.log('flow 5 - inside checkLogin() function in dataservice ' + " " + user);
     return this.http.post<boolean>('api/check-login', user);
   }
 

@@ -36,7 +36,8 @@ export class LoginComponent implements OnInit {
   }
 
   onSubmit() {
-    console.table(this.loginForm.value);
+    console.log("flow 3 - after the user submits or clicks the button in login.component.ts");
+    // console.table(this.loginForm.value);
     this.fullName = this.loginForm.get('fullName')?.value;
     this.password = this.loginForm.get('password')?.value;
     // The error message Type 'string | null | undefined' is not assignable to type 'string'. Type 'undefined' is not assignable to type 'string'. is a TypeScript error that occurs when you try to assign a value of type string | null | undefined to a variable of type string1.
@@ -46,12 +47,11 @@ export class LoginComponent implements OnInit {
     if (this.fullName && this.password) {
       this.user = { fullName: this.fullName, password: this.password };
     }
-    console.log(this.user);
+    console.log("flow 4 - from loigin.component.ts after getting the data from the user " + " " + this.user);
 
     this.ds.checkLogin(this.user).subscribe({
       next: (data) => {
-        console.log(data);
-
+        console.log("inside the checkLogin() function in login.component.ts " + " " + data);
         if (data) {
           alert('Login successful!');
           sessionStorage.setItem('user', this.user.fullName);

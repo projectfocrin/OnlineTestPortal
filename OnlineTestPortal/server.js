@@ -14,7 +14,10 @@ const path = require('path');
 const bodyParser = require('body-parser');
 
 // importing the api.js from routes folder 
+// The require() function reads the file specified by the path and then executes it. 
+// The module then exports an object which can be used by other parts of your application
 const api = require('./servers/routes/api');
+console.log("flow 1 - inside server.js receiving api" + " " + api);
 
 // It parses the incoming request body and converts it to JSON format.
 app.use(bodyParser.json());
@@ -27,9 +30,13 @@ app.use(bodyParser.urlencoded({extended:false}));
 // /api is the starting path for api's
 // In this case, it is used to mount the api middleware function at the /api path. 
 // This means that any request that starts with /api will use the api middleware function. 
-app.use('/api', function(req, res, next){
-   next();
-});
+// app.use('/api', function(req, res, next){
+//    console.log("flow 6 - inside app.use() in server.js");
+//    // it passes control to the next matching route 
+//    req.get('Something');
+//    next(api);
+// });
+app.use('/api', api);
 
 
 // for static files which includes all the compiled files
@@ -47,8 +54,8 @@ app.get('*', function(req,res){
 // mentioning the port to be 5000 but it was showing already in use so using 3000
 const port = process.env.PORT || 3000;
 
-// this line starts to listen in the port 5000 
-app.listen(port, console.log(`Server started on port ${port}`));
+// this line starts to listen in the port 3000 
+app.listen(port, console.log(`flow 2 - Server started on port ${port}`));
 
 
 // module.exports = function(req,res,next){
