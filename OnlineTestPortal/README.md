@@ -25,3 +25,48 @@ Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To u
 ## Further help
 
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+
+
+# To implement angular bootstrap:
+- `ng add ngx-bootstrap` for angular bootstrap 
+- add `NgbModule` in app.module.ts folder
+- `import { NO_ERRORS_SCHEMA } from '@angular/core';` and `schemas: [NO_ERRORS_SCHEMA],` in mgModule for ngx-bootstrap to work without errors
+
+
+- npm i --save express 
+- ng build to build the project 
+- node server.js runs the node server
+
+
+
+const express = require('express');
+
+
+const app = express();
+
+
+const path = require('path');
+ 
+const bodyParser = require('body-parser');
+
+const api = require('./servers/routes/api');
+
+app.use(bodyParser.json());
+
+app.use(bodyParser.urlencoded({extended:false}));
+app.use('/api',api);
+
+
+app.use(express.static(path.join(__dirname, 'dist/online-test-app')))
+
+app.get('*', function(req,res){
+   res.sendFile(path.join(__dirname,'dist/online-test-app/index.html'));
+});
+
+
+const port = process.env.PORT || 5000;
+
+
+app.listen(port, console.log(`Server started on port ${port}`));
+
+

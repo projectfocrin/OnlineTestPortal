@@ -1,1 +1,19 @@
-<p>login works!</p>
+<div class="container">
+  <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="form">
+    Name:
+    <input
+      type="text"
+      formControlName="fullName"
+      placeholder="Name"
+      class="form-control"
+    />
+    <div *ngIf="f['fullName'].touched && f['fullName'].invalid">
+      <p *ngIf="f['fullName'].errors && f['fullName'].errors['required']">
+        Name is required
+      </p>
+    </div>
+    Password: <br>
+    <input type="email" formControlName="password" placeholder="password" class="form-control" />
+    <button type="submit" class="btn btn-primary">Login</button>
+  </form>
+</div>
