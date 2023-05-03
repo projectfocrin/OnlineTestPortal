@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Quiz } from '../quiz';
 import { DataserviceService } from '../dataservice.service';
 
+
 @Component({
   selector: 'app-quizzes',
   templateUrl: './quizzes.component.html',
@@ -29,6 +30,8 @@ export class QuizzesComponent implements OnInit {
   }
 
   getSelectedOption(questionIndex: number, question:Quiz){
+    console.log(questionIndex, question, " " + this.selectedOption);
+    
     // means that the button is clicked
     this.isSubmitted = true;
     // changing the selectedQuestion to the currently selected question

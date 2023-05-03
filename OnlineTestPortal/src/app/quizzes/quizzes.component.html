@@ -1,29 +1,49 @@
 <app-navbar></app-navbar>
+
 <div class="container">
-    <div *ngFor="let question of questions; let i = index" class="card md-3">
-      <div class="card-body">
-        <h5 class="card-title">{{ question.question }}</h5>
-      </div>
-      <!-- In the example you provided, let j=index is used to declare a local variable j and assign it the value of the current index of the loop. 
+  <!-- In the example you provided, let j=index is used to declare a local variable j and assign it the value of the current index of the loop. 
           The index variable is provided by the *ngFor directive and represents the current index of the loop. -->
-      <div *ngFor="let choice of question.choices; let j = index" class="form-check">
-          <!-- [(ngModel)] is a two way binding from html to ts and vice versa -->
-          <!-- In the example you provided, id="choice{{j}}" is used to generate a unique identifier for each radio button. 
+  <div *ngFor="let question of questions; let i = index" class="card mb-3">
+    <div class="card-body">
+      <h5 class="card-title">{{ question.question }}</h5>
+      <div
+        *ngFor="let choice of question.choices; let j = index"
+        class="form-check"
+      >
+        <!-- [(ngModel)] is a two way binding from html to ts and vice versa -->
+        <!-- In the example you provided, id="choice{{j}}" is used to generate a unique identifier for each radio button. 
               The {{j}} syntax is used to interpolate the value of the j variable into the string. -->
-        <input class="form-check-input" type="radio" name="choice" id="choice{{j}}" [(ngModel)] ="selectedOption"/>
+        <input
+          class="form-check-input"
+          type="radio"
+          name="choice"
+          id="choice{{ j }}"
+          [value]="choice"
+          [(ngModel)]="selectedOption"
+        />
         <!-- In the example you provided, for="option{{j}}" is used to associate the label with the corresponding radio button. 
           The for attribute specifies which form element the label is bound to. In this case, it is bound to the radio button with the id attribute of "option{{j}}". -->
-        <label class="form-check-label" for="option{{j}}">
+        <label class="form-check-label" for="option{{ j }}">
           {{ choice }}
         </label>
       </div>
-      <button class="btn btn-primary" (click)="getSelectedOption(i,question)" [disabled] = "selectedQuestion===question || isAnswered(i)">Check Answer</button>
+      <button
+        class="btn btn-primary"
+        (click)="getSelectedOption(i, question)"
+        [disabled]="selectedQuestion === question || isAnswered(i)"
+      >
+        Check Answer
+      </button>
       <!-- if the selectedQuestion(which is the 2-way binded answer) is equal to the answer at question or isAnswered(i) function is true -->
-      <div *ngIf="selectedQuestion===question || isAnswered(i)">
-      <!-- print the text at the index position of answerResult -->
-          <div [ngClass] = "isCorrect1(i)?'correct':'wrong'">{{answerResult[i]}}</div>
-       </div>
+      <div *ngIf="selectedQuestion === question || isAnswered(i)">
+        <div [ngClass]="isCorrect1(i) ? 'correct' : 'wrong'">
+          {{ answerResult[i] }}
+        </div>
+      </div>
     </div>
-    <button class="btn btn-primary mt-5 mb-3" (click)="getResult()" >Check Result</button>
   </div>
-  
+  <button class="btn btn-primary mt-5 mb-3" (click)="getResult()">
+    Check Result
+  </button>
+  <div *ngIf="viewResult">{{ numberOfCorrectAnswers }}</div>
+</div>
